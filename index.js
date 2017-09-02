@@ -160,6 +160,47 @@ bot.on("message", function(message) {
             currConnection = null;
             message.channel.send("Bye Bye");
             break;
+        case "remove":
+            if(!gather) return;
+            if(!message.member.roles.has("288979928160927744")) return;
+            if(!args[1]){
+                message.channel.send("The command is: ~remove [number]");
+                return;
+            }
+
+            var j = 0;
+            var numRem = args[1]-1;
+            var nameRem = players[numRem];
+            var tempPlayers = [];
+            players[numRem] = null;
+            for(var i = 0; i < 10; i++){
+                if(players[i] != null){
+                    tempPlayers[j] = players[i];
+                    j++;
+                }     
+            }
+            players = [];
+            for(var i = 0; i < tempPlayers.length; i++)
+                players[i] = tempPlayers[i];
+            // ---------------------------------------------------
+            j = 0;
+            var memberRem = members[numRem];
+            var tempPlayers = [];
+            members[numRem] = null;
+            for(var i = 0; i < 10; i++){
+                if(members[i] != null){
+                    tempPlayers[j] = members[i];
+                    j++;
+                }
+                    
+            }
+            members = [];
+            for(var i = 0; i < tempPlayers.length; i++)
+                members[i] = tempPlayers[i];
+
+            gatherSize--;
+            message.channel.send(nameRem + " has been removed from the gather");
+            break;
         case "gather":
             if(!message.member.roles.has("288979928160927744")) return;
             if(!args[1]){
