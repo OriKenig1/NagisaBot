@@ -55,8 +55,6 @@ function play(connection) {
     });
 }
 
-
-
 bot.on("ready", function() {
     console.log("Nagisa Bot, ONLINE");
     bot.user.setGame('dango daikazoku')
@@ -332,6 +330,11 @@ bot.on("message", function(message) {
 });
 
 bot.login(TOKEN);
+
+// To keep bot awake
+setInterval(() => {
+    http.get('http://your-app-name.herokuapp.com');
+  }, 900000);
 
 function rank_to_string(rank_num){
     if(rank_num == 6)
