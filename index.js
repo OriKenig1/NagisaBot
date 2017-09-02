@@ -34,7 +34,7 @@ var Blue_IDS = [];
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; 
 
 app.listen(port, () => {
     // will echo 'Our app is running on http://localhost:5000 when run locally'
