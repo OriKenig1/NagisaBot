@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Nagisa Bot by Orangę",
   "main": "index.js",
+  "engines": {
+    "node": "latest",
+    "npm": "latest"
+  },
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Orikę",
