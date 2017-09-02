@@ -247,7 +247,7 @@ bot.on("message", function(message) {
 
             if(gatherSize == 10){
                  message.channel.send("**The gather is ready!**"); 
-                  var embed = new Discord.RichEmbed()
+                var embed = new Discord.RichEmbed()
                 .addField("-",
                 players[0] 
                 + "\n\n" + players[1] 
@@ -313,6 +313,15 @@ bot.on("message", function(message) {
                 message.channel.sendEmbed(embedB);
                 message.channel.sendEmbed(embedR);
 
+                members_rank = [];
+                ranks = [0, 0, 0, 0 ,0, 0, 0, 0 ,0 ,0];
+                Blue = [];
+                Red = [];
+                Red_Names = [];
+                Blue_Names = [];
+                Red_IDS = [];
+                Blue_IDS = [];
+                
                 /*
                 setTimeout(function(){
                     console.log("Removing gather role from members .. ")
