@@ -15,8 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "latest",
-    "discord.js": "latest",
-    "opusscript": "latest",
-    "ytdl-core": "latest"
+    "discord.js": "11.2.1"
   }
 }
