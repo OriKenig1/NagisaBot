@@ -132,18 +132,14 @@ bot.on("message", function(message) {
             message.channel.send(pName + " has opend a gather, the code is '**~" + code + "**'");    
             break;
         case "join":
-			message.channel.send("cheese1");
             var roles = message.member.roles;
             let no_mic = message.guild.roles.find("name", "No Microphone");
-            if(roles.has(no_mic.id)) return;
-message.channel.send("cheese2");  
+			if(no_mic.id != NULL)
+				if(roles.has(no_mic.id)) return;
             pName = "<@" + message.author.id + ">";
             if(!gather) // Gather is open?
 				message.channel.send("Gather isn't open at the moment");  
             if(gatherSize == 10) return; // Gather is full?
-			message.channel.send("cheese3");
-            if(contains.call(players, pName)) return; // Player already in gather?
-			message.channel.send("cheese4");
 
             gatherSize++;
 
@@ -168,7 +164,7 @@ message.channel.send("cheese2");
                 + "\n\n" + players[8]
                 + "\n\n" + players[9], true)
                 .setColor('CYAN');
-                message.channel.sendEmbed(embed);
+                message.channel.send(embed);
 
                 message.channel.send("**Organizing teams ...**"); 
 
@@ -213,8 +209,8 @@ message.channel.send("cheese2");
                 + "\n\n" + rank_to_string(Red_IDS[3])
                 + "\n\n" + rank_to_string(Red_IDS[4]), true);
 
-                message.channel.sendEmbed(embedB);
-                message.channel.sendEmbed(embedR);
+                message.channel.send(embedB);
+                message.channel.send(embedR);
 
                 members_rank = [];
                 ranks = [0, 0, 0, 0 ,0, 0, 0, 0 ,0 ,0];
@@ -250,7 +246,7 @@ message.channel.send("cheese2");
                 + "\n\n" + playersPrint[8]
                 + "\n\n" + playersPrint[9], true)
                 .setColor('CYAN');
-                message.channel.sendEmbed(embed);
+                message.channel.send(embed);
 
             break;
         case "help":
@@ -260,7 +256,7 @@ message.channel.send("cheese2");
 				+ "\n" +
 				"~gather [code] - open a gather")
                 .setColor('ORANGE');
-                message.channel.sendEmbed(embed);
+                message.channel.send(embed);
             break;
         default:
             message.channel.send("I don't know this command ;-;");
