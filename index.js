@@ -113,7 +113,7 @@ bot.on("message", function(message) {
             if(gather) message.channel.send("Closing the last gather and opening a new one");
 
             var pName = "<@" + message.author.id + ">";
-            code = args[1];
+            //code = args[1];
             console.log(code);
             gatherSize = 0;
             gather = true;
