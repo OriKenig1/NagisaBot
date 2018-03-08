@@ -127,9 +127,8 @@ bot.on("message", function(message) {
             break;
         case "join":
             var roles = message.member.roles;
-            let no_mic = message.guild.roles.find("name", "No Microphone");
-			if(no_mic != NULL)
-				if(roles.has(no_mic.id)) return;
+            //let no_mic = message.guild.roles.find("name", "No Microphone");
+			//if(roles.has(no_mic.id)) return;
             pName = "<@" + message.author.id + ">";
             if(!gather) // Gather is open?
 				message.channel.send("Gather isn't open at the moment");  
