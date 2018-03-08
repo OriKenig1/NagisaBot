@@ -8,7 +8,7 @@ var bot = new Discord.Client();
 
 const PREFIX = "~";
 
-var fortunes = ["Yes", "No", "Maybe", "Lev is fat"];
+var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 var servers =  {}; 
 var URL;
 var dispatcher;
@@ -262,18 +262,14 @@ bot.on("message", function(message) {
 
             break;
         case "help":
-            if(!message.member.roles.has("288980244516306944") && !message.member.roles.has("288979928160927744")){
-                message.channel.send("Nagisa bot is exclusive for the anime freaks");
-                return;
-            } 
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
-                "~ask [question] - ask Nagisa a question" )
+                "~ask [question] - ask Gnar a question" )
                 .setColor('ORANGE');
                 message.channel.sendEmbed(embed);
             break;
         default:
-            message.channel.send("I don't know this command >.<");
+            message.channel.send("I don't know this command ;-;");
     }
 });
 
