@@ -132,7 +132,7 @@ bot.on("message", function(message) {
             message.channel.send(pName + " has opend a gather, the code is '**~" + code + "**'");    
             break;
         case code.toLocaleLowerCase():
-
+message.channel.send("cheese1");
             var roles = message.member.roles;
             let no_mic = message.guild.roles.find("name", "No Microphone");
             if(roles.has(no_mic.id)) return;
