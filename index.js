@@ -15,7 +15,7 @@ var dispatcher;
 var stream;
 var currConnection;
 
-var code = "Nagisa";
+var code = "code";
 var gather = false;
 var gatherSize = 0;
 var players = [];
@@ -105,7 +105,7 @@ bot.on("message", function(message) {
             message.channel.send(nameRem + " has been removed from the gather");
             break;
         case "gather":
-            if(!message.member.roles.has("288979928160927744")) return;
+            //if(!message.member.roles.has("288979928160927744")) return;
             if(!args[1]){
                 message.channel.send("The command is: ~gather [code]");
                 return;
@@ -138,9 +138,10 @@ bot.on("message", function(message) {
             if(roles.has(no_mic.id)) return;
 
             pName = "<@" + message.author.id + ">";
-            if(!gather) return;
-            if(gatherSize == 10) return;
-            if(contains.call(players, pName)) return;
+            if(!gather) // Gather is open?
+				message.channel.send("Gather isn't open at the moment");  
+            if(gatherSize == 10) return; // Gather is full?
+            if(contains.call(players, pName)) return; // Player already in gather?
 
             gatherSize++;
 
@@ -149,7 +150,8 @@ bot.on("message", function(message) {
             message.channel.send(pName + " joined the gather (**" + gatherSize + "**/10)"); 
 
             if(gatherSize == 10){
-                 message.channel.send("**The gather is ready!**"); 
+                message.channel.send("**The gather is ready!**"); 
+				
                 var embed = new Discord.RichEmbed()
                 .addField("-",
                 players[0] 
@@ -166,10 +168,6 @@ bot.on("message", function(message) {
                 .setColor('CYAN');
                 message.channel.sendEmbed(embed);
 
-                /*
-                for(var i = 0; i < gatherSize; i++)
-                    members[i].addRole(members[i].guild.roles.find("name", "Gather")); 
-                */
                 message.channel.send("**Organizing teams ...**"); 
 
                 getRoles(message);
@@ -224,20 +222,12 @@ bot.on("message", function(message) {
                 Blue_Names = [];
                 Red_IDS = [];
                 Blue_IDS = [];
-                
-                /*
-                setTimeout(function(){
-                    console.log("Removing gather role from members .. ")
-                    for(var i = 0; i < gatherSize; i++)
-                        members[i].removeRole(members[i].guild.roles.find("name", "Gather")); 
-                    gather = false;
-                }, 30000);
-                */
+              
             }
 
             break;
         case "list":
-            if(!message.member.roles.has("288979928160927744")) return;
+            //if(!message.member.roles.has("288979928160927744")) return;
             var playersPrint = ['-', '-', '-','-','-','-', '-', '-','-','-'];
             for(var i = 0; i < 10; i++){
                 if(players[i] != null)
@@ -264,7 +254,9 @@ bot.on("message", function(message) {
         case "help":
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
-                "~ask [question] - ask Gnar a question" )
+                "~ask [question] - ask Gnar a question"
+				+ "\n" +
+				"~gather [code] - open a gather")
                 .setColor('ORANGE');
                 message.channel.sendEmbed(embed);
             break;
@@ -277,7 +269,7 @@ bot.login(TOKEN);
 
 // To keep bot awake
 setInterval(() => {
-    http.get('http://your-app-name.herokuapp.com');
+    http.get('http://nagisabot.herokuapp.com');
   }, 900000);
 
 function rank_to_string(rank_num){
