@@ -136,12 +136,14 @@ bot.on("message", function(message) {
             var roles = message.member.roles;
             let no_mic = message.guild.roles.find("name", "No Microphone");
             if(roles.has(no_mic.id)) return;
-
+message.channel.send("cheese2");  
             pName = "<@" + message.author.id + ">";
             if(!gather) // Gather is open?
 				message.channel.send("Gather isn't open at the moment");  
             if(gatherSize == 10) return; // Gather is full?
+			message.channel.send("cheese3");
             if(contains.call(players, pName)) return; // Player already in gather?
+			message.channel.send("cheese4");
 
             gatherSize++;
 
