@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const YTDLC = require('ytdl-core');
 const TOKEN = process.env.TOKEN;
 
 const express = require('express');
@@ -41,23 +40,10 @@ app.listen(port, () => {
     console.log('Our app is running on http://localhost:' + port);
 });
 
-function play(connection) {
-    stream = YTDLC(URL, {filter: "audioonly"});
-    URL = "0";
-    dispatcher = connection.playStream(stream);
-
-    dispatcher.on("end", function() {
-        console.log("END"); 
-        if(URL != "0")
-            play(connection);  
-        else
-            connection.disconnect();
-    });
-}
 
 bot.on("ready", function() {
-    console.log("Nagisa Bot, ONLINE");
-    bot.user.setGame('dango daikazoku')
+    console.log("Gnar Bot, ONLINE");
+    bot.user.setGame('EGO VEGO')
 });
 
 bot.on("message", function(message) {
@@ -68,11 +54,8 @@ bot.on("message", function(message) {
     var args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0].toLowerCase()){
-        case "ping":   
-            message.channel.send("Pong!");
-            break;
         case "info":
-            message.channel.send("Nagisa Bot, made by Orangę");
+            message.channel.send("Gnar Bot, made by Orangę");
             break;
         case "ask":
             if(args[1])
@@ -80,86 +63,6 @@ bot.on("message", function(message) {
              else
                 message.channel.send("'" + PREFIX + "ask [question]'");
              break;
-        case "play":
-            if(!message.member.roles.has("288980244516306944") && !message.member.roles.has("288979928160927744")){
-                message.channel.send("Nagisa bot is exclusive for the anime freaks");
-                return;
-            } 
-            if(!args[1]){
-                message.channel.send("The command is: ~play [link]");
-                return;
-            }
-            if(!message.member.voiceChannel) {
-                message.channel.send("You must be in a voice channel to use this command");
-                return;
-            }
-
-            URL = args[1];
-            var matches = URL.match(/watch\?v=\w+/);
-            
-            if(!matches){
-               message.channel.send("This is not a valid youtube link"); 
-               return;
-            }
-            
-            if(!message.guild.voiceConnection){
-                console.log("connection: OFF");
-                message.member.voiceChannel.join().then(function(connection) {
-                    play(connection);
-                });
-            }else{
-                console.log("connection: ON");
-                dispatcher.end();
-                /*
-                if(dispatcher.destroyed)
-                    play(currConnection, false); 
-                else{
-                    stream.destroy();
-                    dispatcher.end();
-                }
-                */
-                    
-            }
-
-            break;
-        case "volume":
-            if(!args[1]){
-                message.channel.send("The command is: ~volume [number]");
-                return;
-            }
-            if(dispatcher == null) return;
-            if(args[1] >= 10 && args[1] <= 150)
-                dispatcher.setVolume(args[1]/100);
-            break;
-        case "pause":
-            if(!message.member.roles.has("288980244516306944") && !message.member.roles.has("288979928160927744")){
-                message.channel.send("Nagisa bot is exclusive for the anime freaks");
-                return;
-            } 
-            if(!dispatcher) return;
-            if(dispatcher.paused) return;
-            dispatcher.pause();
-            break;
-        case "resume":
-            if(!message.member.roles.has("288980244516306944") && !message.member.roles.has("288979928160927744")){
-                message.channel.send("Nagisa bot is exclusive for the anime freaks");
-                return;
-            } 
-            if(!dispatcher) return;
-            if(!dispatcher.paused) return;
-            dispatcher.resume();
-            break;
-        case "stop":
-            if(!message.member.roles.has("288980244516306944") && !message.member.roles.has("288979928160927744")){
-                message.channel.send("Nagisa bot is exclusive for the anime freaks");
-                return;
-            } 
-            URL = "0";
-            if(dispatcher) dispatcher.end();
-            if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-            currConnection = null;
-            message.channel.send("Bye Bye");
-            break;
         case "remove":
             if(!gather) return;
             if(!message.member.roles.has("288979928160927744")) return;
@@ -365,12 +268,7 @@ bot.on("message", function(message) {
             } 
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
-                "~ask [question] - ask Nagisa a question" 
-                + "\n\n" + "~play [link] - play a song"
-                + "\n\n" + "~volume 10-150 - change the volume"
-                + "\n\n" + "~pause - pause the current song"
-                + "\n\n" + "~resume - resume after pausing"
-                + "\n\n" + "~stop - stop playing songs")
+                "~ask [question] - ask Nagisa a question" )
                 .setColor('ORANGE');
                 message.channel.sendEmbed(embed);
             break;
