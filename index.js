@@ -106,15 +106,9 @@ bot.on("message", function(message) {
             break;
         case "gather":
             //if(!message.member.roles.has("288979928160927744")) return;
-            if(!args[1]){
-                message.channel.send("The command is: ~gather [code]");
-                return;
-            }
             if(gather) message.channel.send("Closing the last gather and opening a new one");
 
             var pName = "<@" + message.author.id + ">";
-            //code = args[1];
-            console.log(code);
             gatherSize = 0;
             gather = true;
             players = [];
@@ -129,12 +123,12 @@ bot.on("message", function(message) {
             Red_IDS = [];
             Blue_IDS = [];
 
-            message.channel.send(pName + " has opend a gather, the code is '**~" + code + "**'");    
+            message.channel.send(pName + " has opend a gather, type '**~join**' to join");    
             break;
         case "join":
             var roles = message.member.roles;
             let no_mic = message.guild.roles.find("name", "No Microphone");
-			if(no_mic.id != NULL)
+			if(no_mic != NULL)
 				if(roles.has(no_mic.id)) return;
             pName = "<@" + message.author.id + ">";
             if(!gather) // Gather is open?
